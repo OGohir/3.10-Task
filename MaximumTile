@@ -1,0 +1,79 @@
+/*
+ * This code takes the length and width value of a rectangle floor and finds the maximum tile which is the tile 
+ * with the biggest size, able to fit in this rectangle with all tiles being square and none gettig cut off.
+ * 
+ * author @Omaima Gohir
+ */
+
+// import necessary BlueJ files
+import java.util.Scanner;
+
+// class name is 'MaximumTile'
+public class MaximumTile 
+{
+    
+    public static void main(String[] args) 
+    {
+        
+        Scanner input = new Scanner(System.in);
+        
+        // variable declaration, also known as fields (variables declared outside of a method)
+        
+        //variable type integer, for the variable width
+        int width;
+        //variable type integer,for the variable length
+        int length;
+        
+        int steps = -1;
+        
+
+        System.out.println("Width: ");
+        //takes width number
+        width = input.nextInt();
+
+        System.out.println("Length: ");
+        //takes length number
+        length = input.nextInt();
+        
+        //This statement is that if length is greater than width, the code will STILL run by replacing lengths value with width
+        // if length is greater than width, switch numbers
+        if (length > width) 
+        {
+            //variable type of integer, for the variable switch_dimension which equals length.
+            int switch_dimension = length;
+            //length is now equal to width
+            length = width;
+            //width is equal to the ORIGINAL value of length, which is stored in switch_dimension, so that length!=width and width!=length
+            width = switch_dimension;
+        }
+        
+        /*
+         * loop checks if width modulo (%) length is not equal to 0, which is also knwon as the remainder
+         * basically it's checking if it should be done in one step, when it doesn't equal 0, continue.
+         * we take a new variable to determine how many times length is in width. Answer determines the number of times.
+         * the newLength is equal to the REMAINING length, found by subtracting the width from the length x answer
+         * the newWidth is equal to the length, to continue to loop until = 0
+         */
+        
+        while (width % length != 0) 
+        {
+            // variable type integer, for the variable leftoverDimension, finding how many times length is in width 
+            int leftoverDimension = width / length;
+            // variable type integer, for the variable newLength. it finds how much space was leftover
+            int newLength = width - length * leftoverDimension;
+            // variable type integer, for the variable newWidth, which is equal to the length
+            int newWidth = length;
+            //print out the how many times there's steps (increases by 1 each time the loop is run)
+            steps++;
+            System.out.println("Step " + steps + ": " + "Length: " + length + ", Width: " + width);
+
+            // length = newLength, for loop to continue 
+            length = newLength;
+            //width = newWidth, for loop to continue
+            width = newWidth;
+        }
+
+        //prints out the maximum tile, which is = to the length.
+        System.out.println("Final Dimension: " + length);
+    }
+}
